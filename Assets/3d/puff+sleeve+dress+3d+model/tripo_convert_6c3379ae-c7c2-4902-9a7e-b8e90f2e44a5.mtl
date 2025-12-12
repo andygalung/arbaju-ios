@@ -1,0 +1,16 @@
+# Blender 4.5.0 MTL File: 'None'
+# www.blender.org
+
+newmtl tripo_mat_6c3379ae-c7c2-4902-9a7e-b8e90f2e44a5
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd puffsleevedress3dmodel_basecolor.JPEG
+map_Ns puffsleevedress3dmodel_roughness.JPEG
+map_Pr puffsleevedress3dmodel_roughness.JPEG
+map_refl puffsleevedress3dmodel_metallic.JPEG
+map_Pm puffsleevedress3dmodel_metallic.JPEG
+map_Bump -bm 1.000000 puffsleevedress3dmodel_normal.JPEG
