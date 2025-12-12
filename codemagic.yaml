@@ -5,7 +5,7 @@ workflows:
     environment:
       vars:
         UNITY_VERSION: "2022.3.61f1"
-        UNITY_HASH: "ef64fa412494"
+        UNITY_HASH: "46b0af2a28c3"
       xcode: latest
 
     scripts:
@@ -13,12 +13,14 @@ workflows:
         script: |
           echo "Downloading Unity Editor..."
           curl -L -o Unity.pkg "https://download.unity3d.com/download_unity/$UNITY_HASH/MacEditorInstaller/Unity.pkg"
+          ls -lh Unity.pkg
           sudo installer -pkg Unity.pkg -target /
 
       - name: Install Unity iOS Build Support
         script: |
-          echo "Downloading Unity iOS Support..."
+          echo "Downloading Unity iOS Build Support..."
           curl -L -o Unity-iOS.pkg "https://download.unity3d.com/download_unity/$UNITY_HASH/MacEditorTargetInstaller/UnitySetup-iOS-Support-for-Editor-$UNITY_VERSION.pkg"
+          ls -lh Unity-iOS.pkg
           sudo installer -pkg Unity-iOS.pkg -target /
 
       - name: Build Unity iOS Project
