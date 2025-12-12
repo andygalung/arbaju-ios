@@ -1,32 +1,37 @@
 workflows:
-  unity-ios:
-    name: Unity iOS Build (No License Required)
-    max_build_duration: 60
+  unity_ios:
+    name: Build Unity iOS
     environment:
       vars:
-        UNITY_VERSION: "2022.3.20f1"
+        UNITY_VERSION: "2022.3.61f1"
       xcode: latest
+      cocoapods: default
+      groups:
+        - unity
 
     scripts:
-      - name: Install Unity with iOS modules
+      - name: Install Unity with iOS support
         script: |
-          curl -s https://raw.githubusercontent.com/game-ci/unity-ci-tools/main/install-unity.sh | bash -s -- "$UNITY_VERSION" ios
+          unityhub install $UNITY_VERSION --modules ios
 
-      - name: Build Unity iOS
+      - name: Activate Unity (free license, no activation needed)
+        script: |
+          echo "Using Unity free license"
+
+      - name: Build Unity to Xcode (iOS)
         script: |
           /Applications/Unity/Hub/Editor/$UNITY_VERSION/Unity.app/Contents/MacOS/Unity \
+            -batchmode \
+            -quit \
+            -logFile /dev/stdout \
             -projectPath . \
-            -buildTarget iOS \
-            -quit -batchmode \
             -executeMethod BuildScript.BuildiOS
 
-      - name: Build IPA (Xcode)
+      - name: Build IPA using Xcode
         script: |
-          cd build/ios
-          xcodebuild -project Unity-iPhone.xcodeproj \
-            -scheme Unity-iPhone \
-            -sdk iphoneos \
-            -configuration Release \
-            archive -archivePath output.xcarchive
+          xcode-project build-ipa \
+            --project "build/ios/Unity-iPhone.xcodeproj" \
+            --scheme "Unity-iPhone"
 
-          x
+    artifacts:
+      - build/ios/**/*.ipa
