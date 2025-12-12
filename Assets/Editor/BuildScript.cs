@@ -1,19 +1,19 @@
 using UnityEditor;
-using UnityEngine;
 
 public static class BuildScript
 {
     public static void BuildiOS()
     {
         string path = "build/ios";
-        BuildPlayerOptions options = new BuildPlayerOptions
+
+        BuildPlayerOptions opts = new BuildPlayerOptions
         {
-            scenes = new[] { "Assets/Scenes/Main.unity" },
+            scenes = new[] { "Assets/Scenes/SampleScene.unity" }, // ganti sesuai scene kakak
             locationPathName = path,
             target = BuildTarget.iOS,
             options = BuildOptions.None
         };
 
-        BuildPipeline.BuildPlayer(options);
+        BuildPipeline.BuildPlayer(opts);
     }
 }
